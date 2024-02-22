@@ -1,0 +1,56 @@
+# Dependency directories
+node_modules/
+/.pnp
+.pnp.js
+
+# Production build folder for React
+/build
+
+# Environment configuration files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.swp
+*.swo
+*.sublime-workspace
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional: .cache directory used by some tools like babel
+.cache
+
+# Optional: Parcel bundle cache
+.parcel-cache
+
+# Optional: coverage directory used by tools like istanbul
+coverage
+
+# Optional: nyc test coverage
+.nyc_output
+
+# Optional: TernJS port file
+.tern-port
+
+# Optional: Mac files
+._*
+.Spotlight-V100
+.Trashes
