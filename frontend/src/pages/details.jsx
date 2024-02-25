@@ -22,7 +22,7 @@ const Details = () => {
     }
     fetchData();
     setFormData(book);
-  }, [id,modal,book.ISBN]);
+  }, [id, modal, book.ISBN]);
 
   const openModal = () => {
     setModal(true);
@@ -32,47 +32,51 @@ const Details = () => {
     setModal(false);
   };
 
-    const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
-    }
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try{
-            if(formData.price === '' || formData.title === '' || formData.author === '' || formData.ISBN === ''){
-                alert('Please fill out all fields');
-                return;
-            }
-            if(formData.ISBN.length !== 13  || isNaN(formData.ISBN)){
-                alert('Invalid ISBN');
-                return;
-            }
-            const response = await axios.put(`http://localhost:3000/books/${id}`, formData);
-            console.log(response);
-            setBook(response.data);
-            
-            closeModal();
-        }
-        catch(error){
-            console.log(error);
-        
-        }
-    }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      if (
+        formData.price === "" ||
+        formData.title === "" ||
+        formData.author === "" ||
+        formData.ISBN === ""
+      ) {
+        alert("Please fill out all fields");
+        return;
+      }
+      if (formData.ISBN.length !== 13 || isNaN(formData.ISBN)) {
+        alert("Invalid ISBN");
+        return;
+      }
+      const response = await axios.put(
+        `http://localhost:3000/books/${id}`,
+        formData
+      );
+      console.log(response);
+      setBook(response.data);
 
-    const handleDelete = async () => {
-        try{
-            const response = await axios.delete(`http://localhost:3000/books/${id}`);
-            console.log(response);
-            window.location.href = "/";
-        }
-        catch(error){
-            console.log(error);
-        }
+      closeModal();
+    } catch (error) {
+      console.log(error);
     }
+  };
 
+  const handleDelete = async () => {
+    try {
+      const response = await axios.delete(`http://localhost:3000/books/${id}`);
+      console.log(response);
+      window.location.href = "/";
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className=" flex justify-between items-center h-screen">
@@ -84,10 +88,16 @@ const Details = () => {
         <p className=" text-4xl font-semibold">By-{book.author}</p>
         <p className=" text-4xl font-semibold">Price-${book.price}</p>
         <p className=" text-2xl font-semibold">ISBN-{book.ISBN}</p>
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 my-4 px-4 rounded w-max " onClick={openModal}>
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 my-4 px-4 rounded w-max "
+          onClick={openModal}
+        >
           Update Details
         </button>
-        <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-max " onClick={handleDelete}>
+        <button
+          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-max "
+          onClick={handleDelete}
+        >
           Delete Book
         </button>
         <ReactModal
@@ -125,7 +135,7 @@ const Details = () => {
               type="text"
               name="author"
               className="p-2 m-2 rounded-lg w-4/6"
-                defaultValue={book.author}
+              defaultValue={book.author}
               onChange={handleChange}
             />
             <label className="block text- font-medium text-gray-700 w-fit">
@@ -135,19 +145,18 @@ const Details = () => {
               type="text"
               name="ISBN"
               className="p-2 m-2 rounded-lg w-4/6"
-                defaultValue={book.ISBN}
+              defaultValue={book.ISBN}
               onChange={handleChange}
             />
             <button
               onClick={handleSubmit}
               className="p-2 m-2 bg-slate-300 w-4/6"
             >
-                Update Book
+              Update Book
             </button>
           </form>
         </ReactModal>
       </div>
-     
     </div>
   );
 };
